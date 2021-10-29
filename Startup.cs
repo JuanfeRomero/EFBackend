@@ -30,7 +30,7 @@ namespace EFBackEnd
             services.AddControllers();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddDbContext<LibraryContext>
-                (op => op.UseSqlServer(Configuration["ConnectionString:BookStoreDB"]));
+                (op => op.UseSqlServer(Configuration.GetConnectionString("BookStoreDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
