@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EFBackEnd.Entities;
+using EFBackEnd.Repository.Contract;
+using EFBackEnd.Repository.Implementation;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFBackEnd
@@ -31,6 +33,10 @@ namespace EFBackEnd
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddDbContext<LibraryContext>
                 (op => op.UseSqlServer(Configuration.GetConnectionString("BookStoreDB")));
+            services.AddScoped<ILibraryRepository<Author>, LibraryRepository>();
+            services.AddScoped<ILibraryRepository<Book>, BookRepository>();
+            services.AddScoped<ILibraryRepository<Lend>, LendRepository>();
+            services.AddScoped<ILibraryRepository<Member>, MemberRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

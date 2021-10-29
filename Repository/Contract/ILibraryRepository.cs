@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EFBackEnd.Repository.Contract
 {
-    interface ILibraryRepository<T>
+    public interface ILibraryRepository<T>
     {
         IEnumerable<T> GetAll();
         T Post(T t);

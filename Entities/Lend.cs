@@ -24,8 +24,4 @@ namespace EFBackEnd.Entities
         public Member Member { get; set; }
 
     }
-
-    public class Date
-    {
-    }
 }

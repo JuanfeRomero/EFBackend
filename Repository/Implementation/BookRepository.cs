@@ -7,25 +7,25 @@ using EFBackEnd.Repository.Contract;
 
 namespace EFBackEnd.Repository.Implementation
 {
-    public class LibraryRepository:ILibraryRepository<Author>
+    public class BookRepository: ILibraryRepository<Book>
     {
         readonly LibraryContext _libraryContext;
 
-        public LibraryRepository(LibraryContext context)
+        public BookRepository(LibraryContext context)
         {
             _libraryContext = context;
         }
 
-        public IEnumerable<Author> GetAll()
+        public IEnumerable<Book> GetAll()
         {
-            return _libraryContext.Authors.ToList();
+            return _libraryContext.Books.ToList();
         }
 
-        public Author Get(Guid authorId)
+        public Book Get(Guid bookId)
         {
             try
             {
-                return _libraryContext.Authors.Find(authorId);
+                return _libraryContext.Books.Find(bookId);
             }
             catch (Exception e)
             {
@@ -34,15 +34,15 @@ namespace EFBackEnd.Repository.Implementation
             }
         }
 
-        public Author Post(Author author)
+        public Book Post(Book book)
         {
             try
             {
                 if (_libraryContext != null)
                 {
-                    _libraryContext.Authors.Add(author);
+                    _libraryContext.Books.Add(book);
                     _libraryContext.SaveChanges();
-                    return author;
+                    return book;
                 }
                 else
                 {
@@ -56,15 +56,15 @@ namespace EFBackEnd.Repository.Implementation
             }
         }
 
-        public Author Update(Author author)
+        public Book Update(Book book)
         {
             try
             {
                 if (_libraryContext != null)
                 {
-                    _libraryContext.Authors.Update(author);
+                    _libraryContext.Books.Update(book);
                     _libraryContext.SaveChanges();
-                    return author;
+                    return book;
                 }
                 else
                 {
@@ -78,16 +78,16 @@ namespace EFBackEnd.Repository.Implementation
             }
         }
 
-        public int Delete(Guid authorId)
+        public int Delete(Guid bookId)
         {
             try
             {
                 if (_libraryContext != null)
                 {
-                    var author = _libraryContext.Authors.Find(authorId);
-                    if (author != null)
+                    var book = _libraryContext.Books.Find(bookId);
+                    if (book != null)
                     {
-                        _libraryContext.Authors.Remove(author);
+                        _libraryContext.Books.Remove(book);
                         return 1;
                     }
                     else
