@@ -19,8 +19,12 @@ namespace EFBackEnd.Entities
         [Required]
         public DateTime DueOn { get; set; }
 
+        [ForeignKey("BookId")]
+        public Guid BookId { get; set; }
         public Book Book { get; set; }
 
+        [ForeignKey("MemberId")]
+        public Guid MemberId { get; set; }
         public Member Member { get; set; }
 
     }

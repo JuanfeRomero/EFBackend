@@ -20,11 +20,12 @@ namespace EFBackEnd.Entities
         public string isbn { get; set; }
 
 
-        [ForeignKey("AuthorId")] 
+        [ForeignKey("AuthorId")]
         public Author Author { get; set; }
 
         public Guid AuthorId { get; set; }
 
+        [NotMapped]
         public List<Lend> Lends { get; set; }
     }
 }

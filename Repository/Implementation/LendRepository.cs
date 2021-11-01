@@ -88,6 +88,7 @@ namespace EFBackEnd.Repository.Implementation
                     if (lend != null)
                     {
                         _libraryContext.Lends.Remove(lend);
+                        _libraryContext.SaveChanges();
                         return 1;
                     }
                     else

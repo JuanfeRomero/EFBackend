@@ -21,6 +21,7 @@ namespace EFBackEnd.Entities
         [MaxLength(50)]
         public string LastName { get; set; }
 
+        [NotMapped]
         public List<Book> Books { get; set; }
     }
 }

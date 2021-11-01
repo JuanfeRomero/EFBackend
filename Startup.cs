@@ -29,6 +29,7 @@ namespace EFBackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddDbContext<LibraryContext>
@@ -44,6 +45,7 @@ namespace EFBackEnd
         {
             if (env.IsDevelopment())
             {
+                app.UseCors(options => options.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
                 app.UseDeveloperExceptionPage();
             }
 

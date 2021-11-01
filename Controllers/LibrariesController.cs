@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using EFBackEnd.Entities;
 using EFBackEnd.Repository.Contract;
 using EFBackEnd.Repository.Implementation;
+using Microsoft.AspNetCore.Cors;
 
 namespace EFBackEnd.Controllers
 {
@@ -35,8 +36,8 @@ namespace EFBackEnd.Controllers
             return Ok(authors);
         }
 
-        [HttpGet]
-        [Route("author")]
+        [Route("author/{authorId}")]
+        [HttpGet("/{authorId}")]
         public IActionResult GetAuthor(Guid authorId)
         {
             try
@@ -74,8 +75,8 @@ namespace EFBackEnd.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("author")]
+        [Route("author/update/{authorId}")]
+        [HttpPatch("/{authorId}")]
         public IActionResult UpdateAuthor([FromBody] Author authorParam)
         {
             try
@@ -97,8 +98,8 @@ namespace EFBackEnd.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("author")]
+        [Route("author/delete/{authorId}")]
+        [HttpDelete("/{authorId}")]
         public IActionResult DeleteAuthor(Guid authorId)
         {
             try
@@ -121,8 +122,8 @@ namespace EFBackEnd.Controllers
             return Ok(books);
         }
 
-        [HttpGet]
-        [Route("book")]
+        [Route("book/{bookId}")]
+        [HttpGet("/{bookId}")]
         public IActionResult GetBook(Guid bookId)
         {
             try
@@ -160,8 +161,8 @@ namespace EFBackEnd.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("book")]
+        [Route("book/update/{bookId}")]
+        [HttpPatch("/{bookId}")]
         public IActionResult UpdateBook([FromBody] Book bookParam)
         {
             try
@@ -183,8 +184,8 @@ namespace EFBackEnd.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("book")]
+        [Route("book/delete/{bookId}")]
+        [HttpDelete("/{bookId}")]
         public IActionResult DeleteBook(Guid bookId)
         {
             try
@@ -207,8 +208,8 @@ namespace EFBackEnd.Controllers
             return Ok(lends);
         }
 
-        [HttpGet]
-        [Route("lend")]
+        [Route("lend/{lendId}")]
+        [HttpGet("/{lendId}")]
         public IActionResult GetLend(Guid lendId)
         {
             try
@@ -231,6 +232,8 @@ namespace EFBackEnd.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    lendParam.Book = _bookRepository.Get(lendParam.BookId);
+                    lendParam.Member = _memberRepository.Get(lendParam.MemberId);
                     Lend lend = _lendRepository.Post(lendParam);
                     return Ok(lend);
                 }
@@ -246,8 +249,8 @@ namespace EFBackEnd.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("lend")]
+        [Route("lend/update/{lendId}")]
+        [HttpPatch("/{lendId}")]
         public IActionResult UpdateLend([FromBody] Lend lendParam)
         {
             try
@@ -269,8 +272,8 @@ namespace EFBackEnd.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("lend")]
+        [Route("lend/delete/{lendId}")]
+        [HttpDelete("/{lendId}")]
         public IActionResult DeleteLend(Guid lendId)
         {
             try
@@ -293,8 +296,8 @@ namespace EFBackEnd.Controllers
             return Ok(members);
         }
 
-        [HttpGet]
-        [Route("member")]
+        [Route("lend/{memberId}")]
+        [HttpGet("/{memberId}")]
         public IActionResult GetMember(Guid memberId)
         {
             try
@@ -332,8 +335,8 @@ namespace EFBackEnd.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("member")]
+        [Route("member/update/{memberId}")]
+        [HttpPatch("/{memberId}")]
         public IActionResult UpdateMember([FromBody] Member memberParam)
         {
             try
@@ -355,8 +358,8 @@ namespace EFBackEnd.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("member")]
+        [Route("member/delete/{memberId}")]
+        [HttpDelete("/{memberId}")]
         public IActionResult DeleteMember(Guid memberId)
         {
             try

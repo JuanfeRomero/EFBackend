@@ -88,6 +88,7 @@ namespace EFBackEnd.Repository.Implementation
                     if (author != null)
                     {
                         _libraryContext.Authors.Remove(author);
+                        _libraryContext.SaveChanges();
                         return 1;
                     }
                     else

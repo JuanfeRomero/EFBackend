@@ -20,7 +20,7 @@ namespace EFBackEnd.Entities
         public string LastName { get; set; }
         [Required]
         public bool Status { get; set; }
-
+        [NotMapped]
         public List<Lend> Lends { get; set; }
     }
 }
